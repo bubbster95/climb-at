@@ -5,10 +5,18 @@
   <script src="https://unpkg.com/jquery"></script>
 </head>
 <body>
-{% block content %}
-  CONTETN GOES HERE
-{% endblock %}
+  {% include 'nav.html' %}
+  
+  <div class="container">
+    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
 
+    {% block content %}
+    CONTETN GOES HERE
+    {% endblock %}
+
+  </div>
 <script src="https://unpkg.com/axios/dist/axios.js"></script>
 </body>
 </html>

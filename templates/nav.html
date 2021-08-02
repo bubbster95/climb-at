@@ -1,0 +1,17 @@
+
+<nav>
+    <button action="/">Home</button>
+    <button action="/search">Search</button>
+    {% if g.user %}
+        <form action="/user/logout">
+            <button>Log Out</button>
+        </form>
+    {% else %}
+        <form action="/user/login">
+            <button>Login</button>
+        </form>
+        <form action="/user/signup">
+            <button>Sign Up</button>
+        </form>
+    {% endif %}
+</nav>
