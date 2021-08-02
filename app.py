@@ -115,7 +115,6 @@ def log_in_user():
         flash("Invalid credentials.", 'danger')
 
     return render_template('users/login.html', form=form)
-
         
 @app.route('/user/logout')
 def logout():
@@ -128,12 +127,40 @@ def logout():
 @app.route("/user/<int:user_id>")
 def show_user_info(user_id):
     """User profile page."""
+    
+    this_user = User.query.get(user_id)
 
-    return render_template("users/profile-page.html")
+    return render_template("users/profile-page.html", user = this_user)
 
 @app.route("/user/<int:user_id>/edit", methods=["GET", "POST"])
 def edit_user_profile(user_id):
     """Edit user profile info."""
+
+    if CURR_USER_KEY in session:
+        user = User.query.get(user_id)
+    else:
+        return redirect('/')
+
+    form = EditUserForm(obj=user)
+    if form.validate_on_submit():
+        password = form.password.data
+        username = form.username.data
+
+        if user.authenticate(user.username, password):
+            user.username = username
+            user.email = form.email.data
+            user.image_url = form.image_url.data
+            user.bio = form.bio.data
+
+            db.session.add(user)
+            db.session.commit()
+            
+            return redirect(f'/user/{user_id}')
+        else:
+            return redirect('/')
+    else:
+        return render_template('/users/edit.html', user = user, form = form)
+
 
 #################
 # Search Routes #
@@ -143,9 +170,11 @@ def edit_user_profile(user_id):
 def filter_search_page():
     """Allows users to filter climbs in the area."""
 
-##############
+    return render_template('/climbs/search.html')
+
+################
 # Climb Routes #
-##############
+################
 
 @app.route("/climb/<int:climb_id>")
 def show_climb_profile(climb_id):

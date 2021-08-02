@@ -2,7 +2,26 @@
 
 {% block content %}
     <h1>Welcome</h1>
-    <form method="GET" action="/user/signup">
-        <button>Sign Up</button>
+    <h2>{{user.username}}</h2>
+    <h3>Email:</h3>
+    <p>{{user.email}}</p>
+    <h3>Bio:</h3>
+    <p>{{user.bio}}</p>
+    {% if user.completed|length > 0 %}
+        <h3>Completed Climbs:</h3>
+        {% for climb in user.completed %}
+            <p>climb.completed_climb</p>
+        {% endfor %}
+    {% endif %}
+    
+    {% if user.todo|length > 0 %}
+        <h3>Climbs To-Do:</h3>
+        {% for todo in user.todo %}
+            <p>climb.climb_to_do</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="GET" action="/user/{{user.id}}/edit">
+        <button>Edit Profile</button>
     </form>
 {% endblock %}
