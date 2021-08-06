@@ -7,6 +7,7 @@
     <p>{{user.email}}</p>
     <h3>Bio:</h3>
     <p>{{user.bio}}</p>
+    
     {% if user.completed|length > 0 %}
         <h3>Completed Climbs:</h3>
         {% for climb in user.completed %}

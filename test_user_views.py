@@ -39,25 +39,47 @@ class UserViewTestCase(TestCase):
         db.session.rollback()
         return resp
 
+####################
+# Tests User Views #
+####################
+
     def test_user_show(self):
         with self.client as c:
             resp = c.get(f"/user/{self.testuser_id}")
-
             self.assertEqual(resp.status_code, 200)
 
-            self.assertIn("@testuser", str(resp.data))
+            self.assertIn("testuser", str(resp.data))
 
     def setup_completed(self):
         c1 = Completed(completed_climb=1, climber_who_completed=self.testuser_id)
-        c2 = Completed(completed_climb=2, climber_who_completed=self.testuser_id)
 
-        db.session.add_all([c1, c2])
+        db.session.add(c1)
         db.session.commit()
+      
 
     def test_user_completed(self):
         self.setup_completed()
 
         with self.client as c:
-            resp = c.get(f"/user/{self.testuser_id}/completed")
-
+            resp = c.get(f"/user/{self.testuser_id}")
+            
             self.assertEqual(resp.status_code, 200)
+
+            self.assertIn("Completed Climbs:", str(resp.data))
+
+    def setup_todo(self):
+        c2 = ToDo(climb_to_do=1, climber_to_do_it=self.testuser_id)
+
+        db.session.add(c2)
+        db.session.commit()
+      
+
+    def test_user_todo(self):
+        self.setup_todo()
+
+        with self.client as c:
+            resp = c.get(f"/user/{self.testuser_id}")
+            
+            self.assertEqual(resp.status_code, 200)
+
+            self.assertIn("Climbs To-Do:", str(resp.data))

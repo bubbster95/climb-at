@@ -1,5 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Search For climbs</h1>
+
+  <h2 class="join-message">Search For Climbs</h2>
+  <form method="POST" id="search_form">
+    {{ form.hidden_tag() }}
+
+    {% for field in form if field.widget.input_type != 'hidden' %}
+      {% for error in field.errors %}
+        <span class="text-danger">{{ error }}</span>
+      {% endfor %}
+      {{ field(placeholder=field.label.text, class="form-control") }}
+    {% endfor %}
+
+    <button class="btn btn-primary btn-lg btn-block">Search</button>
+  </form>
+
+  {% if data %}
+    
+    {% for climb in data %}
+    <div id={{climb.meta_mp_route_id}}>
+      <h3>{{climb.name}}</h3>
+      <p>Dificulty: {{climb.yds}}</p>
+      <p>Type: {{climb.type}}</p>
+      <p>First Ascent: {{climb.fa}}</p>
+      <p>Latitude: {{climb.lat}}</p>
+      <p>Longitude: {{climb.lng}}</p>
+      <p>Climbing Sector: {{climb.meta_parent_sector}}</p>
+      <p></p>
+    </div>
+    {% endfor %}
+
+  {% endif %}
+
+
+
 {% endblock %}

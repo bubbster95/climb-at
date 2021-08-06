@@ -2,10 +2,11 @@ import json
 import os
 
 from flask import Flask, render_template, request, flash, redirect, session, g
+from werkzeug.wrappers import response
 from models import db, connect_db, User, ToDo, Completed
-from forms import UserAddForm, LoginForm, EditUserForm
+from forms import UserAddForm, LoginForm, EditUserForm, SearchForClimbsForm
 from sqlalchemy.exc import IntegrityError
-# from helpers import
+from helpers import create_api_response
 
 CURR_USER_KEY = "curr_user"
 
@@ -169,8 +170,14 @@ def edit_user_profile(user_id):
 @app.route("/search", methods=["GET", "POST"])
 def filter_search_page():
     """Allows users to filter climbs in the area."""
+    form = SearchForClimbsForm()
 
-    return render_template('/climbs/search.html')
+    if form.validate_on_submit():
+        data = request.form
+        resp = create_api_response(data)
+        return render_template("/climbs/search.html", form=form, data = resp)
+    else: 
+        return render_template('/climbs/search.html', form=form)
 
 ################
 # Climb Routes #

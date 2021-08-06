@@ -21,8 +21,7 @@ class Completed(db.Model):
 
     climber_who_completed = db.Column(
         db.Integer,
-        db.ForeignKey('users.id', ondelete="cascade"),
-        primary_key=True
+        db.ForeignKey('users.id', ondelete="cascade")
     )
 
 class ToDo(db.Model):
@@ -37,8 +36,7 @@ class ToDo(db.Model):
 
     climber_to_do_it = db.Column(
         db.Integer,
-        db.ForeignKey('users.id', ondelete="cascade"),
-        primary_key=True
+        db.ForeignKey('users.id', ondelete="cascade")
     )
 
 
@@ -82,19 +80,9 @@ class User(db.Model):
         nullable=False
     )
 
-    completed = db.relationship(
-        "User",
-        secondary="completed",
-        primaryjoin=(Completed.climber_who_completed == id),
-        secondaryjoin=(Completed.completed_climb == id)
-    )
+    completed = db.relationship("Completed")
 
-    todo = db.relationship(
-        "User",
-        secondary="todo",
-        primaryjoin=(ToDo.climber_to_do_it == id),
-        secondaryjoin=(ToDo.climb_to_do == id)
-    )
+    todo = db.relationship("ToDo")
 
 
     def __repr__(self):
@@ -127,8 +115,6 @@ class User(db.Model):
             password=hashed_pwd,
             image_url=image_url,
         )
-        print("********** Testing ***********")
-        print(user)
         db.session.add(user)
         return user
 
