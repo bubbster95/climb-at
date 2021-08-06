@@ -29,8 +29,13 @@ def create_api_response(data):
 
     response = getClimb.json()
 
-    print("********** Response **********")
-    print(radius, compound_url)
-
     if response: return response
     else: return None
+
+
+def get_climb_specific_response(id):
+    ROOT_URL = "https://climb-api.openbeta.io/geocode/v1/climbs"
+
+    climb = requests.get(f"{ROOT_URL}/{id}")
+
+    return climb.json()
