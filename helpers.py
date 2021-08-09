@@ -32,10 +32,37 @@ def create_api_response(data):
     if response: return response
     else: return None
 
+def compound_climb_responses(data, user):
+    climbs = create_api_response(data)
 
-def get_climb_specific_response(id):
+    filtered_climbs = [] 
+
+    for climb in climbs:
+        climb['toggle'] = "null"
+        for todo in user.todo:
+            if int(climb['meta_mp_route_id']) == int(todo.climb_to_do):
+                climb['toggle'] = "todo"
+        for completed in user.completed:
+            if int(climb['meta_mp_route_id']) == int(completed.completed_climb):
+                climb['toggle'] = 'completed'
+
+        filtered_climbs.append(climb)
+
+    return filtered_climbs
+
+def get_climb_specific_response(id, user):
     ROOT_URL = "https://climb-api.openbeta.io/geocode/v1/climbs"
 
     climb = requests.get(f"{ROOT_URL}/{id}")
 
-    return climb.json()
+    climb = climb.json()[0]
+    
+    climb['toggle'] = "null"
+    for todo in user.todo:
+        if int(climb['meta_mp_route_id']) == int(todo.climb_to_do):
+            climb['toggle'] = "todo"
+    for completed in user.completed:
+        if int(climb['meta_mp_route_id']) == int(completed.completed_climb):
+            climb['toggle'] = 'completed'
+
+    return climb

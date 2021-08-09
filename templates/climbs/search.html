@@ -2,33 +2,54 @@
 
 {% block content %}
 
-  <h2 class="join-message">Search For Climbs</h2>
-  <form method="POST" id="search_form">
-    {{ form.hidden_tag() }}
-
-    {% for field in form if field.widget.input_type != 'hidden' %}
-      {% for error in field.errors %}
-        <span class="text-danger">{{ error }}</span>
-      {% endfor %}
-      {{ field(placeholder=field.label.text, class="form-control") }}
-    {% endfor %}
-
-    <button class="btn btn-primary btn-lg btn-block">Search</button>
-  </form>
-
-  {% if data %}
+  <div class="form-container">
     
-    {% for climb in data %}
+    <h2>Search For Climbs</h2>
+
+    <form method="POST" id="search_form">
+      {{ form.hidden_tag() }}
+  
+      {% for field in form if field.widget.input_type != 'hidden' %}
+        {% for error in field.errors %}
+          <span>{{ error }}</span>
+        {% endfor %}
+        {{ field(placeholder=field.label.text, class="form-control") }}
+      {% endfor %}
+  
+      <button>Search</button>
+    </form>
+  </div>
+
+  {% if climbs %}
+    
+    {% for climb in climbs %}
     <div id={{climb.meta_mp_route_id}}>
       <h3>{{climb.name}}</h3>
 
-      <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
-        <button>Set To-Do</button>
-      </form>
+      {% if user %}
+        {% if climb.toggle == 'todo' %}
+          <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
+            <button>Remove To-Do</button>
+          </form>
+        {% else %}
+          <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
+            <button>Add To-Do</button>
+          </form>
+        {% endif %}
 
-      <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
-        <button>Completed Climb</button>
-      </form>
+        
+        {% if climb.toggle == 'completed' %}
+          <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
+            <button>Mark as Uncomplete</button>
+          </form>
+        {% else %}
+          <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
+            <button>Mark as Completed</button>
+          </form>
+        {% endif %}
+        
+    
+      {% endif %}
 
       <p>Dificulty: {{climb.yds}}</p>
       <p>Type: {{climb.type}}</p>

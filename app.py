@@ -2,11 +2,12 @@ import json
 import os
 
 from flask import Flask, render_template, request, flash, redirect, session, g
+import requests
 from werkzeug.wrappers import response
 from models import db, connect_db, User, ToDo, Completed
 from forms import UserAddForm, LoginForm, EditUserForm, SearchForClimbsForm
 from sqlalchemy.exc import IntegrityError
-from helpers import create_api_response, get_climb_specific_response
+from helpers import create_api_response, compound_climb_responses, get_climb_specific_response
 
 CURR_USER_KEY = "curr_user"
 
@@ -170,13 +171,21 @@ def edit_user_profile(user_id):
 @app.route("/search", methods=["GET", "POST"])
 def filter_search_page():
     """Allows users to filter climbs in the area."""
+    data = None
     form = SearchForClimbsForm()
-        
+   
     if form.validate_on_submit():
         data = request.form
-        resp = create_api_response(data)
 
-        return render_template("/climbs/search.html", form=form, data = resp)
+        if g.user:
+            this_user = User.query.get(session[CURR_USER_KEY])
+    
+            compund_climbs = compound_climb_responses(data, this_user)
+            return render_template("/climbs/search.html", form=form, climbs = compund_climbs, user = this_user)
+        else:
+            climbs = create_api_response(data)
+            return render_template("/climbs/search.html", form=form, climbs = climbs)
+
     else: 
         return render_template('/climbs/search.html', form=form)
 
@@ -188,9 +197,11 @@ def filter_search_page():
 def show_climb_profile(climb_id):
     """Show information about a climb."""
 
-    climb = get_climb_specific_response(climb_id)
+    user = User.query.get(session[CURR_USER_KEY])
 
-    return render_template('/climbs/show.html', climb = climb[0])
+    climb = get_climb_specific_response(climb_id, user)
+
+    return render_template('/climbs/show.html', climb = climb, user = user)
 
 @app.route("/add-to-todo/<int:climb_id>", methods=["POST"])
 def add_climb_todo(climb_id):
@@ -205,7 +216,7 @@ def add_climb_todo(climb_id):
             db.session.commit()
 
             flash(f'Removed climb number: {climb_id} from To-Do')
-            return redirect("/search")
+            return redirect("/")
 
     if g.user:
         todo = ToDo(climb_to_do = climb_id, climber_to_do_it = session[CURR_USER_KEY])
@@ -213,7 +224,7 @@ def add_climb_todo(climb_id):
         db.session.add(todo)
         db.session.commit()
         flash(f'Succefully added climb number: {climb_id} To-Do')
-        return redirect("/search")
+        return redirect("/")
     else:
         flash("Please login to add climbs to User Profile.")
         return redirect("/users/login")
@@ -224,7 +235,7 @@ def add_completed_climb(climb_id):
     """Adds climb to current users completed list"""
 
     completed = User.query.get(session[CURR_USER_KEY]).completed
-
+    todos = User.query.get(session[CURR_USER_KEY]).todo
     for complete in completed:
         if complete.completed_climb == climb_id:
 
@@ -232,15 +243,18 @@ def add_completed_climb(climb_id):
             db.session.commit()
 
             flash(f'Removed climb number: {climb_id} from Completed')
-            return redirect("/search")
+            return redirect("/")
 
     if g.user:
+        for todo in todos:
+            if todo.climb_to_do == climb_id:
+                db.session.delete(todo)
         complete = Completed(completed_climb = climb_id, climber_who_completed = session[CURR_USER_KEY])
 
         db.session.add(complete)
         db.session.commit()
         flash(f'Succefully added climb number: {climb_id} to Completed')
-        return redirect("/search")
+        return redirect("/")
     else:
         flash("Please login to add climbs to User Profile.")
         return redirect("/users/login")
