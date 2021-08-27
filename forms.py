@@ -33,9 +33,11 @@ class EditUserForm(FlaskForm):
 def check_for_long(self, field):
     if not self.long.data:
         raise ValidationError("Must add Longitude to use Latittude")
+        
 def check_for_lat(self, field):
     if not self.lat.data:
         raise ValidationError("Must add Longitude to use Latittude")
+
 def check_for_long_lat(self, field):
     if not self.long.data or not self.lat.data:
         raise ValidationError("Must add Longitude and Latittude to use radious")

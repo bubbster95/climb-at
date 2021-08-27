@@ -9,7 +9,7 @@
 <body>
   {% include 'nav.html' %}
   
-  <div>
+  <div class="content">
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div class="alert alert-{{ category }}">{{ message }}</div>
     {% endfor %}

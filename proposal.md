@@ -16,7 +16,7 @@ know everything in advance and that these details might change later). Answer
 questions like the ones below, but feel free to add more information:
 
     A. What does your database schema look like?
-	>Isn’t that decided by the API? It should be something like:
+	> Isn’t that decided by the API? It should be something like:
     - Id
     - Title
     - Location
@@ -28,12 +28,12 @@ questions like the ones below, but feel free to add more information:
 
     B. What kinds of issues might you run into with your API?
 
-	>The API might not have complete data, it was compiled by climbers afterall
+	> The API might not have complete data, it was compiled by climbers afterall
 	Writing the filter feature might prove to be tough
 	
     C. Is there any sensitive information you need to secure?
 
-	>If I choose to build a User feature then I’d have to encrypt passwords
+	> If I choose to build a User feature then I’d have to encrypt passwords
 	And the API uses a key but that's not really sensitive.
 
     D. What functionality will your app include?
