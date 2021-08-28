@@ -1,10 +1,10 @@
 from flask import render_template, flash, redirect, session, g, Blueprint
-from models import db, User, ToDo, Completed
+
+from models import User, ToDo, Completed, db
 from helpers import get_climb_specific_response
+from config import CURR_USER_KEY
 
 climb_routes = Blueprint('climb_routes', __name__)
-
-CURR_USER_KEY = "curr_user"
 
 @climb_routes.route("/climb/<int:climb_id>")
 def show_climb_profile(climb_id):

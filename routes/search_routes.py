@@ -1,10 +1,8 @@
-
 from flask import render_template, request, session, g, Blueprint
 from forms import SearchForClimbsForm
 from models import User
 from helpers import compound_climb_responses, create_api_response
-
-CURR_USER_KEY = "curr_user"
+from config import CURR_USER_KEY
 
 search_routes = Blueprint('search_routes', __name__)
 

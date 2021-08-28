@@ -7,15 +7,6 @@ users_routes = Blueprint('users_routes', __name__)
 
 CURR_USER_KEY = "curr_user"
 
-@users_routes.before_request
-def add_user_to_g():
-    """If user is logged in, add curr user to Flask global."""
-
-    if CURR_USER_KEY in session:
-        g.user = User.query.get(session[CURR_USER_KEY])
-    else:
-        g.user = None
-
 def do_login(user):
     """Log in user."""
 

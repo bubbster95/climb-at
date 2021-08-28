@@ -1,8 +1,10 @@
 import json
 import os
 
-from flask import Flask
-from models import connect_db
+from flask import Flask, session, g
+from models import User, connect_db
+
+from config import CURR_USER_KEY
 
 from routes.climb_routes import climb_routes
 from routes.home_routes import home_routes
@@ -10,6 +12,16 @@ from routes.search_routes import search_routes
 from routes.users_routes import users_routes
 
 app = Flask(__name__)
+
+@app.before_request
+def add_user_to_g():
+    """If user is logged in, add curr user to Flask global."""
+
+    if CURR_USER_KEY in session:
+        g.user = User.query.get(session[CURR_USER_KEY])
+    else:
+        g.user = None
+
 app.register_blueprint(climb_routes)
 app.register_blueprint(home_routes)
 app.register_blueprint(search_routes)
