@@ -15,8 +15,8 @@
         {% endfor %}
         {{ field(placeholder=field.label.text, class="form-control") }}
       {% endfor %}
-  
-      <button>Search</button>
+      <br>
+      <button class="large-button">Search</button>
     </form>
   </div>
 
@@ -28,23 +28,23 @@
 
       {% if user %}
         {% if climb.toggle == 'todo' %}
-          <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
-            <button>Remove To-Do</button>
+          <form action="/add-to-todo/{{climb.meta_mp_route_id}}"method="POST">
+            <button class="climb-button remove">Remove To-Do</button>
           </form>
         {% else %}
           <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
-            <button>Add To-Do</button>
+            <button class="climb-button add">Add To-Do</button>
           </form>
         {% endif %}
 
         
         {% if climb.toggle == 'completed' %}
           <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
-            <button>Mark as Uncomplete</button>
+            <button  class="climb-button remove">Mark as Incomplete</button>
           </form>
         {% else %}
-          <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
-            <button>Mark as Completed</button>
+          <form action="/add-to-complete/{{climb.meta_mp_route_id}}"  method="POST">
+            <button class="climb-button add">Mark as Completed</button>
           </form>
         {% endif %}
         

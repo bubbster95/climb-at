@@ -6,7 +6,7 @@ nav {
     height: 50px;
     text-align: center;
     justify-content: center;
-    background-color: rgb(173, 219, 136);
+    background-color: rgb(42, 40, 40);
 }
 
 nav > form {
@@ -18,10 +18,12 @@ nav > form {
 }
 
 nav > form > button {
+    margin: 0%;
     position: relative;
     font-size: 1.5em;
     height: 100%;
     width: 24%;
+    color: white;
     background-color: transparent;
     border: solid white 5px;
     border-bottom: transparent;
@@ -29,6 +31,7 @@ nav > form > button {
 }
 
 nav > form > button:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
+    background-color: rgba(0, 128, 128, .5);
+    border: none;
+    color: rgb(230, 240, 206);
 }

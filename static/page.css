@@ -3,14 +3,14 @@ html, body {
     height: 100vh;
     margin: 0;
     padding: 0;
-    color: rgb(42, 38, 24);
+    color: rgb(255, 255, 255);
+    background-color: rgb(62, 63, 65);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 
 h1 {
     text-align: center;
-    color: rgb(42, 38, 24);
 }
 
 .content {
@@ -25,15 +25,6 @@ h1 {
     width: 90%;
     text-align: center;
 }
-.climb-container {
-    position: relative;
-    text-align: center;
-    background-color: lightcyan;
-    padding: 20px;
-    margin: 20px;
-    width: 90%;
-}
-
 .alert {
     background-color: aquamarine;
     text-align: center;
@@ -48,4 +39,28 @@ h1 {
 
 .alert-warning {
     background-color: lightcoral;
+}
+.large-button {
+    font-size: 25pt;
+}
+button {
+    margin: 20px;
+    color: white;
+    background-color: rgba(0, 128, 128, .2);
+    border: solid white 5px;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+}
+
+button:hover {
+    background-color: rgba(0, 128, 128, .5);
+    border: solid white 5px;
+    border-left: transparent;
+    border-right: transparent;
+    border-top: transparent;
+}
+
+form > input {
+    font-size: 1.5rem;
 }

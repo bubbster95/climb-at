@@ -3,15 +3,11 @@
 {% block content %}
     <h1>Welcome Climbers!</h1>
 
-    <h2>Find Climbs</h2>
-    <p>Feel free to look through a collection of climbs</p>
-    <form method="GET"  action="/search">
-        <button>Find Climbs</button>
+    <form method="GET" action="/user/signup">
+        <button class="large-button">Create an Account</button>
     </form>
     <br>
-    <h2>Create an Account</h2>
-    <p>Or create an account to log climbs you've completed or are interested in.</p>
-    <form method="GET" action="/user/signup">
-        <button>Sign Up</button>
+    <form method="GET"  action="/search">
+        <button class="large-button">Find Climbs</button>
     </form>
 {% endblock %}

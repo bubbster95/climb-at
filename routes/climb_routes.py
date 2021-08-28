@@ -42,7 +42,6 @@ def add_climb_todo(climb_id):
         flash("Please login to add climbs to User Profile.", 'warning')
         return redirect("/users/login")
 
-
 @climb_routes.route("/add-to-complete/<int:climb_id>", methods=["POST"])
 def add_completed_climb(climb_id):
 
