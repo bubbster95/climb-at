@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="form-container">
+      
+    <h2>Search For Crags</h2>
+
+    <form method="POST" id="sector_form">
+      {{ sector_form.hidden_tag() }}
+
+      {% for field in sector_form if field.widget.input_type != 'hidden' %}
+        {% for error in field.errors %}
+          <span>{{ error }}</span>
+        {% endfor %}
+        {{ field(placeholder=field.label.text, class="form-control") }}
+      {% endfor %}
+      <br>
+      <button class="large-button">Search</button>
+    </form>
+
+  </div>
+
+  {% if sectors %}
+    {% for sector in sectors %}
+      <div class="sector-container" id={{sector.meta_mp_sector_id}}>
+        <h3><a href="/climb/sector/{{sector.meta_mp_sector_id}}">{{sector.meta_parent_sector}}</a></h3>
+        <p>Lat/Lng Coordinates: {{sector.lat}},{{sector.lng}}</p>
+        <p>{{sector.count}} Climbs</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+
+
+{% endblock %}

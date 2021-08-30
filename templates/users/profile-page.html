@@ -8,17 +8,17 @@
     <h3>Bio:</h3>
     <p>{{user.bio}}</p>
     
-    {% if user.completed|length > 0 %}
+    {% if completed|length > 0 %}
         <h3>Completed Climbs:</h3>
-        {% for climb in user.completed %}
-            <p><a href="/climb/{{climb.completed_climb}}">{{climb.completed_climb}}</a></p>
+        {% for climb in completed %}
+            <p><a href="/climb/{{climb.meta_mp_route_id}}">{{climb.name}}</a></p>
         {% endfor %}
     {% endif %}
     
     {% if user.todo|length > 0 %}
         <h3>Climbs To-Do:</h3>
-        {% for todo in user.todo %}
-        <p><a href="/climb/{{todo.climb_to_do}}">{{todo.climb_to_do}}</a></p>
+        {% for climb in todo %}
+        <p><a href="/climb/{{climb.meta_mp_route_id}}">{{climb.name}}</a></p>
         {% endfor %}
     {% endif %}
 

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}    
+    <h1>{{sector.meta_parent_sector}}</h1>
+    <p>Lattitude: {{sector.lat}} Longitude: {{sector.lng}}</p>
+    <br>
+
+    {% for climb in climbs %}
+        <div class="climb-wrapper" id={{climb.meta_mp_route_id}}>
+        <h3>{{climb.name}}</h3>
+
+        {% if user %}
+            <!-- Toggle ToDo button state -->
+            {% if climb.toggle == 'todo' %}
+            <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
+                <button class="climb-button remove">Remove To-Do</button>
+            </form>
+            {% else %}
+            <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
+                <button class="climb-button add">Add To-Do</button>
+            </form>
+            {% endif %}
+
+            <!-- Toggle completed button state -->
+            {% if climb.toggle == 'completed' %}
+            <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
+                <button class="climb-button remove">Mark as Incomplete</button>
+            </form>
+            {% else %}
+            <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
+                <button class="climb-button add">Mark as Completed</button>
+            </form>
+            {% endif %}
+            
+
+        {% endif %}
+
+        <p>Dificulty: {{climb.yds}}</p>
+        <p>Type: {{climb.type}}</p>
+        <p>First Ascent: {{climb.fa}}</p>
+        <p>Latitude: {{climb.lat}}</p>
+        <p>Longitude: {{climb.lng}}</p>
+        <p>Climbing Sector: {{climb.meta_parent_sector}}</p>
+
+        </div>
+    {% endfor %}
+{% endblock %}

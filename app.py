@@ -2,7 +2,7 @@ import json
 import os
 
 from flask import Flask, session, g
-from models import User, connect_db
+from models import User, connect_db, db
 
 from config import CURR_USER_KEY
 

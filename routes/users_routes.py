@@ -1,3 +1,4 @@
+from helpers import query_climbs, join_climb_ids
 from flask import render_template, flash, redirect, session, g, Blueprint
 from models import db, User
 from forms import UserAddForm, LoginForm, EditUserForm
@@ -80,8 +81,18 @@ def show_user_info(user_id):
     """User profile page."""
     
     this_user = User.query.get(user_id)
+    
+    completed = []
+    todo = []
 
-    return render_template("users/profile-page.html", user = this_user)
+    if len(this_user.completed) > 0:
+        completed_ids = join_climb_ids(this_user.completed)
+        completed = query_climbs(completed_ids, this_user)
+    if len(this_user.todo) > 0:
+        todo_ids = join_climb_ids(this_user.todo)
+        todo = query_climbs(todo_ids, this_user)
+
+    return render_template("users/profile-page.html", user = this_user, completed = completed, todo = todo)
 
 @users_routes.route("/user/<int:user_id>/edit", methods=["GET", "POST"])
 def edit_user_profile(user_id):

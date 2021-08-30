@@ -1,6 +1,4 @@
-"""SQLAlchemy models for Warbler."""
-
-from datetime import datetime
+"""SQLAlchemy models for Climb@."""
 
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
@@ -14,7 +12,7 @@ class Completed(db.Model):
 
     __tablename__ = 'completed'
 
-    completed_climb = db.Column(
+    climb_id = db.Column(
         db.Integer,
         primary_key=True
     )
@@ -29,7 +27,7 @@ class ToDo(db.Model):
 
     __tablename__ = 'todo'
 
-    climb_to_do = db.Column(
+    climb_id = db.Column(
         db.Integer,
         primary_key=True
     )
@@ -38,7 +36,6 @@ class ToDo(db.Model):
         db.Integer,
         db.ForeignKey('users.id', ondelete="cascade")
     )
-
 
 class User(db.Model):
     """User in the system."""
@@ -88,17 +85,6 @@ class User(db.Model):
     def __repr__(self):
         return f"<User #{self.id}: {self.username}, {self.email}>"
 
-    def is_climb_complete(self, this_climb):
-        """Is this user followed by `other_user`?"""
-
-        completed_climb_list = [climb for climb in self.completed if climb == this_climb]
-        return len(completed_climb_list) == 1
-   
-    def is_climb_to_do(self, this_climb):
-        """Is this user followed by `other_user`?"""
-
-        climb_to_do_list = [climb for climb in self.todo if climb == this_climb]
-        return len(climb_to_do_list) == 1
 
     @classmethod
     def signup(cls, username, email, password, image_url):

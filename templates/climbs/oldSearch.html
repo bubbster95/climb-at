@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
   <div class="form-container">
-    
-    <h2>Search For Climbs</h2>
+      
+    <h2>Search For Crags</h2>
 
-    <form method="POST" id="search_form">
-      {{ form.hidden_tag() }}
-  
-      {% for field in form if field.widget.input_type != 'hidden' %}
+    <form method="POST" id="sector_form">
+      {{ sector_form.hidden_tag() }}
+
+      {% for field in sector_form if field.widget.input_type != 'hidden' %}
         {% for error in field.errors %}
           <span>{{ error }}</span>
         {% endfor %}
@@ -20,7 +19,24 @@
     </form>
   </div>
 
-  {% if climbs %}
+  <!-- <div class="form-container">
+    
+    <h2>Search For Climbs</h2>
+
+    <form method="POST" id="climb_form">
+  
+      {% for field in climb_form if field.widget.input_type != 'hidden' %}
+        {% for error in field.errors %}
+          <span>{{ error }}</span>
+        {% endfor %}
+        {{ field(placeholder=field.label.text, class="form-control") }}
+      {% endfor %}
+      <br>
+      <button class="large-button">Search</button>
+    </form>
+  </div> -->
+
+  <!-- {% if climbs %}
     
     {% for climb in climbs %}
     <div class="climb-container" id={{climb.meta_mp_route_id}}>
@@ -61,6 +77,15 @@
     </div>
     {% endfor %}
 
+  {% endif %} -->
+
+  {% if sectors %}
+    {% for sector in sectors %}
+      <div class="sector-container" id={{sector.meta_mp_sector_id}}>
+        <h3>{{sector.meta_parent_sector}}</h3>
+        <p>{{sector.mp_ids}}</p>
+      </div>
+    {% endfor %}
   {% endif %}
 
 

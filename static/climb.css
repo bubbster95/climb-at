@@ -1,4 +1,4 @@
-.climb-container {
+.climb-container, sector-container {
     /* position: relative; */
     display: inline-block;
     text-align: center;

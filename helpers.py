@@ -1,68 +1,65 @@
 import requests
 import json
 
-def create_api_response(data):
+from requests.api import request
 
-    ROOT_URL = "https://climb-api.openbeta.io/geocode/v1/climbs"
-    compound_url = f"{ROOT_URL}"
-    queries = []
+from config import ROOT_URL
 
-    name = data['name']
-    fa = data['fa']
-    lat = data['lat']
-    long = data['long']
-    radius = data['radius'] 
+def query_climbs(climb_ids, user):
+    """Receives array of ids returns info about those climbs."""
 
-    if len(name) > 0:queries.append(f"name={name}")
-    if len(fa) > 0: queries.append(f"fa={fa}")
-    if len(long) > 0 and len(lat) > 0:
-        queries.append(f"latlng={lat},{long}")
-    if len(radius) > 0: queries.append(f"radius={radius}")
+    climbs = requests.get(f"{ROOT_URL}/climbs/{climb_ids}")
 
-    for query in queries:
-        if compound_url == ROOT_URL:
-            compound_url += f"?{query}"
-        else:
-            compound_url += f"&{query}"
+    result = []
+    for climb in climbs.json(): 
 
-    getClimb = requests.get(compound_url)
+        # Refactor Type input for UI
+        types = climb['type'].keys()
+        climb['type'] = ''
+        for type in types:
+            if climb['type'] == '':
+                climb['type'] += type
+            else:
+                climb['type'] += f", {type}"
 
-    response = getClimb.json()
+        # If user, show which climbs have been completed / selected todo
+        if user:
+            climb['toggle'] = ""
+            for todo in user.todo:
+                if int(climb['meta_mp_route_id']) == int(todo.climb_id):
+                    climb['toggle'] = "todo"
+            for completed in user.completed:
+                if int(climb['meta_mp_route_id']) == int(completed.climb_id):
+                    climb['toggle'] = 'completed'
 
-    if response: return response
-    else: return None
-
-def compound_climb_responses(data, user):
-    climbs = create_api_response(data)
-
-    filtered_climbs = [] 
-
-    for climb in climbs:
-        climb['toggle'] = "null"
-        for todo in user.todo:
-            if int(climb['meta_mp_route_id']) == int(todo.climb_to_do):
-                climb['toggle'] = "todo"
-        for completed in user.completed:
-            if int(climb['meta_mp_route_id']) == int(completed.completed_climb):
-                climb['toggle'] = 'completed'
-
-        filtered_climbs.append(climb)
-
-    return filtered_climbs
-
-def get_climb_specific_response(id, user):
-    ROOT_URL = "https://climb-api.openbeta.io/geocode/v1/climbs"
-
-    climb = requests.get(f"{ROOT_URL}/{id}")
-
-    climb = climb.json()[0]
+        result.append(climb)
     
-    climb['toggle'] = "null"
-    for todo in user.todo:
-        if int(climb['meta_mp_route_id']) == int(todo.climb_to_do):
-            climb['toggle'] = "todo"
-    for completed in user.completed:
-        if int(climb['meta_mp_route_id']) == int(completed.completed_climb):
-            climb['toggle'] = 'completed'
+    return result
 
-    return climb
+def query_many_sectors(lat, lng, rad = 3):
+    """Receives an id then returns the data for that one sector"""
+
+    SECTOR_URL = f"{ROOT_URL}/sectors?latlng={lat},{lng}&radius={rad}"
+    result = requests.get(SECTOR_URL)
+
+    return result.json()
+
+def query_sector(id):
+    """Receives an id then returns the data for that one sector"""
+
+    SECTOR_URL = f"{ROOT_URL}/sectors/{id}" 
+    result = requests.get(SECTOR_URL)
+    return result.json()
+
+def join_climb_ids(ids):
+    """Take a list of Id instances and format them into a '|' separated list"""
+    id_string = ''
+    
+    for id in ids:
+        if id_string == '':
+            id_string += str(id.climb_id)
+        else: 
+            id_string += f"|{str(id.climb_id)}"
+    print("***** string id *****")
+    print(ids)
+    return id_string
