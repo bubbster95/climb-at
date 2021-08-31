@@ -1,20 +1,18 @@
+/* Company Colors */
+/* titanium_teal: rgb(25, 125, 125) */
+/* rope_red: rgb(175, 25, 50) */
+
 html, body {
+    position: relative;
     width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
-    color: rgb(255, 255, 255);
-    background-color: rgb(62, 63, 65);
+    color: white;
+    background-color: rgb(75, 75, 75);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-a {
-    color: cadetblue;
-}
-
-a:hover {
-    color: rgb(158, 202, 204);
-}
 
 h1 {
     text-align: center;
@@ -27,47 +25,54 @@ h1 {
     text-align: center;
 }
 
-.form-container {
-    position: relative;
-    width: 90%;
+.climb-container, .sector-container {
+    display: inline-block;
     text-align: center;
-}
-.alert {
-    background-color: aquamarine;
-    text-align: center;
-    font-size: 25pt;
+    border: solid white;
+    background-color: rgba(25, 125, 125, .1);;
     padding: 20px;
-    margin-top: 20px;
+    margin: 10px;
+    width: 20%;
 }
 
-.alert-success {
-    background-color: lightgreen;
+
+/* ***** Phones ***** */
+/* All Screens below 700px wide in portrait and landscape. */
+@media only screen
+    and (max-device-width: 700px) {
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2.5rem;
+    }
+    h3 {
+        font-size: 2rem;
+    }
+    p {
+        font-size: 2rem;
+    }
+    .climb-container, .sector-container {
+        width: 40%;
+    }
+}
+/* All Screens below 700px wide in landscape. */
+@media only screen
+    and (max-device-width: 700px)
+    and (orientation: landscape) {
+    
 }
 
-.alert-warning {
-    background-color: lightcoral;
-}
-.large-button {
-    font-size: 25pt;
-}
-button {
-    margin: 20px;
-    color: white;
-    background-color: rgba(0, 128, 128, .2);
-    border: solid white 5px;
-    border-left: transparent;
-    border-right: transparent;
-    border-bottom: transparent;
+/* Portrait and Landscape Tablets */
+@media only screen 
+    and (min-device-width: 700px) 
+    and (max-device-width: 1200px) {
+
 }
 
-button:hover {
-    background-color: rgba(0, 128, 128, .5);
-    border: solid white 5px;
-    border-left: transparent;
-    border-right: transparent;
-    border-top: transparent;
-}
+/* Non-Retina Laptop Screens */
+@media screen 
+    and (min-device-width: 1200px) 
+    and (max-device-width: 1600px) { 
 
-form > input {
-    font-size: 1.5rem;
 }

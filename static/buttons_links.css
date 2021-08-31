@@ -1,0 +1,85 @@
+/* Company Colors */
+/* titanium_teal: rgb(25, 125, 125) */
+/* rope_red: rgb(175, 25, 50) */
+a {
+    color: rgb(25, 125, 125);
+}
+
+a:hover {
+    color: rgb(175, 25, 50);
+}
+
+.large-button {
+    font-size: 25pt;
+}
+
+button {
+    margin: 20px;
+    color: white;
+    background-color: rgba(25, 125, 125, .5);
+    border: solid rgba(175, 25, 50, .8) 3px;
+    padding: 3px;
+    border-top: transparent;
+    border-bottom: transparent;
+}
+
+button:hover {
+    background-color: rgba(0, 128, 128, .5);
+    border: solid rgba(175, 25, 50, .8) 3px;
+    padding: 0px;
+    border-left: transparent;
+    border-right: transparent;
+}
+
+.climb-button {
+    font-size: 20pt;
+}
+
+.add {
+    background-color: rgba(25, 125, 125, .5);
+}
+
+.remove {
+    background-color: rgba(175, 25, 50, .5);
+}
+
+
+/* ***** Phones ***** */
+
+/* All Screens below 700px wide in portrait. */
+@media only screen
+    and (max-device-width: 700px) {
+    button {
+        border: solid rgba(175, 25, 50, .8) 8px;
+        padding: 3px 10px;
+        border-top: transparent;
+        border-bottom: transparent;
+    }
+    .large-button {
+        font-size: 3rem;
+    }
+    .climb-button {
+        font-size: 2rem;
+    }
+}
+/* All Screens below 700px wide in landscape. */
+@media only screen
+    and (max-device-width: 700px)
+    and (orientation: landscape) {
+    
+
+}
+
+/* Portrait and Landscape Tablets */
+@media only screen 
+    and (min-device-width: 700px) 
+    and (max-device-width: 1200px) {
+
+}
+
+/* Non-Retina Laptop Screens */
+@media screen 
+    and (min-device-width: 1200px) 
+    and (max-device-width: 1600px) { 
+
+}

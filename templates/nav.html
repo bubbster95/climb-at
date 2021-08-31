@@ -1,28 +1,36 @@
-
-<nav>
-
-    <form  action="/search">
-        <button>Search</button>
-    </form>
-
-    {% if g.user %}
-        <form action="/">
-            <button>Profile</button>
+<div class="nav-container">
+    <div class="hamburger bars">
+        <div class="top bar"></div>
+        <div class="middle bar"></div>
+        <div class="bottom bar"></div>
+    </div>
+    <nav class="nav closed">
+        <form  action="/search">
+            <button>Search</button>
         </form>
-
-        <form action="/user/logout">
-            <button>Log Out</button>
-        </form>
+    
+        {% if g.user %}
         
-    {% else %}
-        <form action="/">
-            <button>Home</button>
-        </form>
-        <form action="/user/login">
-            <button>Login</button>
-        </form>
-        <form action="/user/signup">
-            <button>Sign Up</button>
-        </form>
-    {% endif %}
-</nav>
+            <form action="/">
+                <button>Profile</button>
+            </form>
+    
+            <form action="/user/logout">
+                <button>Log Out</button>
+            </form>
+        {% else %}
+    
+            <form action="/">
+                <button>Home</button>
+            </form>
+            <form action="/user/login">
+                <button>Login</button>
+            </form>
+            <form action="/user/signup">
+                <button>Sign Up</button>
+            </form>
+        {% endif %}
+    </nav>
+    <span class="close-hamburger"></span>
+
+</div>

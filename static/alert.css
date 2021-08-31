@@ -1,0 +1,16 @@
+
+.alert {
+    background-color: aquamarine;
+    text-align: center;
+    font-size: 15pt;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.alert-success {
+    background-color: rgb(25, 125, 125);
+}
+
+.alert-warning {
+    background-color: rgb(175, 25, 50);
+}

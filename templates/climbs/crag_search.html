@@ -24,7 +24,7 @@
     {% for sector in sectors %}
       <div class="sector-container" id={{sector.meta_mp_sector_id}}>
         <h3><a href="/climb/sector/{{sector.meta_mp_sector_id}}">{{sector.meta_parent_sector}}</a></h3>
-        <p>Lat/Lng Coordinates: {{sector.lat}},{{sector.lng}}</p>
+        <p>Coordinates: {{sector.lat}},{{sector.lng}}</p>
         <p>{{sector.count}} Climbs</p>
       </div>
     {% endfor %}

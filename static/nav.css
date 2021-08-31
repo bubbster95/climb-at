@@ -1,12 +1,16 @@
-
-nav {
-    position: relative;
-    display: inline-block;
+.nav-container {
     width: 100vw;
     height: 50px;
+}
+nav {
+    z-index: 99;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
     text-align: center;
     justify-content: center;
-    background-color: rgb(42, 40, 40);
+    background-color: rgb(50, 50, 50);
 }
 
 nav > form {
@@ -14,24 +18,165 @@ nav > form {
     width: 25%;
     height: 100%;
     display: inline;
-    /* margin: 0px 5%; */
 }
 
 nav > form > button {
-    margin: 0%;
     position: relative;
+    margin: 0%;
     font-size: 1.5em;
     height: 100%;
     width: 24%;
     color: white;
     background-color: transparent;
-    border: solid white 5px;
+    border: solid  rgb(25, 125, 125) 5px;
     border-bottom: transparent;
     border-top: transparent;
 }
 
 nav > form > button:hover {
-    background-color: rgba(0, 128, 128, .5);
+    background-color: rgb(25, 125, 125);
     border: none;
-    color: rgb(230, 240, 206);
+}
+
+.close-hamburger {
+    position: absolute;
+    z-index: 98;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+}
+   
+.hamburger{
+    position: absolute;
+    z-index: 100;
+    width: 100px;
+    height: 100px;
+    visibility: hidden;
+    transition: .5s;
+}
+
+
+.bar {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    margin: 10% 0px;
+    height: 15%;
+}
+
+.top, .bottom {
+    transition: .5s;
+}
+
+.middle {
+    transition: .5s;
+}
+
+
+/* Non-Retina Laptop Screens */
+@media screen 
+    and (min-device-width: 1200px) 
+    and (max-device-width: 1600px) { 
+
+}
+
+/* Portrait and Landscape Tablets */
+@media only screen 
+    and (min-device-width: 700px) 
+    and (max-device-width: 1200px) {
+
+}
+
+/* ***** Phones ***** */
+/* All Screens below 700px wide in portrait and landscape. */
+@media only screen
+    and (max-device-width: 700px) { 
+        .nav-container {
+            height: 125px;
+        }
+        
+        nav {
+            position: absolute;
+            top: 0;
+            padding-top: 125px;
+            width: 50%;
+            right: 0;
+        }
+
+        .closed {
+            width: 0%;
+            display: none;
+        }
+
+        nav > form {
+            height: 10%;
+            width: 100%;
+            /* margin-top: 10%; */
+            display:flex;
+            justify-content: center;
+        }
+
+        nav > form > button {
+            font-size: 3.5em;
+            height: 100%;
+            width: 100%;
+            border: solid  rgb(25, 125, 125) 5px;
+            border-left: transparent;
+            border-right: transparent;
+            border-top: transparent;
+        }
+
+        .hamburger{
+            width: 100px;
+            height: 100px;
+            right: 25px;
+            top: 15px;
+            visibility: visible;
+        }
+}
+
+
+/* All Screens below 700px wide in landscape. */
+@media only screen
+    and (max-device-width: 700px)
+    and (orientation: landscape) {
+
+        nav > form {
+            height: 10%;
+            width: 100%;
+            margin-top: 5%;
+        }
+
+        nav > form > button {
+            font-size: 2.5em;
+        }
+}
+
+
+.cross {
+    transition: .5s;
+    right: 35%;
+}
+
+.cross-top {
+    position: relative;
+    width: 50%;
+    top: 12px;
+    transform: rotate(45deg);
+}
+
+.cross-middle {
+    position: relative;
+    transition: 0s;
+    width: 0px;
+    visibility: hidden;
+}
+
+.cross-bottom {
+    position: relative;
+    width: 50%;
+    top: -12px;
+    transform: rotate(-45deg);
 }
