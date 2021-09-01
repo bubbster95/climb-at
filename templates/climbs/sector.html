@@ -7,7 +7,13 @@
 
     {% for climb in climbs %}
         <div class="climb-container" id={{climb.meta_mp_route_id}}>
-            <h3><a href="/climb/{{climb.meta_mp_route_id}}">{{climb.name}}</a></h3>
+            <h3><a href="/climb/{{climb.meta_mp_route_id}}">
+                {% if climb.name|length > 25 %}
+                    {{climb.name[:20] + '...'}}
+                {% else %}
+                    {{climb.name}}
+                {% endif %}
+            </a></h3>
 
             <p>Dificulty: {{climb.yds}}</p>
             <p>Type: {{climb.type}}</p>

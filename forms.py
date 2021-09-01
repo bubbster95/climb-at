@@ -24,8 +24,8 @@ class EditUserForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     image_url = StringField('(Optional) Image URL')
-    bio = TextAreaField('Bio', validators=[DataRequired()])
     password = PasswordField('Password', validators=[Length(min=6)])
+    bio = TextAreaField('Bio', validators=[DataRequired()])
 
 def check_for_long(self, field):
     if not self.lng.data:

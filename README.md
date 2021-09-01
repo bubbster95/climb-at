@@ -7,6 +7,7 @@ Table of Contents:
 * [Features](#features-included)
 * [Future Features](#future-features)
 * [Run Climb@ locally](#run-app-locally)
+* [Run Tests](#running-tests)
 * [Links](#links)
 
 #### Features Included:
@@ -38,26 +39,53 @@ To run this app locally you will need to use a bash terminal and python3 to run 
 You must also have a psql server up and running for this project to work locally.
 
 1. Assuming you have postgres installed run:
-    >sudo service postgresql start
+        
+        sudo service postgresql start
 
 2. Create and open VENV in the root folder:
-    >python3 -m venv venv
-    <br>
-    source venv/bin/activate
+
+        python3 -m venv venv
+        <br>
+        source venv/bin/activate
 * Note: 'source venv/bin/activate' needs to be run each time you open the project.
 
 3. Use the requirements.txt file to download all dependencies while VENV is activated.
 
 4. Next run:
-    > createdb make-change
+
+        createdb make-change
 
 5. Now you can run the seed.py file:
-    > python3 seed.py
+
+        python3 seed.py
 
 6. Finally to run the site:
-    > flask run
+    
+        flask run
 
 Thank you for your time.
+
+<br>
+
+---
+
+# Running Tests
+
+#### Run all tests
+    python3 -m unittest discover
+
+#### User Tests
+    python3 -m unittest test.test_user_routes
+
+    python3 -m unittest test.test_user_model
+
+#### Climb routes
+    python3 -m unittest test.test_climb_routes
+
+#### Search Routes
+    python3 -m unittest test.test_search_routes
+
+####
 
 # Links
 

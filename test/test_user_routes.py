@@ -1,7 +1,4 @@
-"""User View test."""
-
-#  FLASK_ENV=production python3 -m unittest test_user_views.py
-
+"""User View Route."""
 import os
 from unittest import TestCase
 from models import db, connect_db, User, Completed, ToDo
@@ -51,7 +48,7 @@ class UserViewTestCase(TestCase):
             self.assertIn("testuser", str(resp.data))
 
     def setup_completed(self):
-        c1 = Completed(climb_id=1, climber_who_completed=self.testuser_id)
+        c1 = Completed(climb_id=117994489, climber_who_completed=self.testuser_id)
 
         db.session.add(c1)
         db.session.commit()
@@ -68,7 +65,7 @@ class UserViewTestCase(TestCase):
             self.assertIn("Completed Climbs:", str(resp.data))
 
     def setup_todo(self):
-        c2 = ToDo(climb_id=1, climber_to_do_it=self.testuser_id)
+        c2 = ToDo(climb_id=117994489, climber_to_do_it=self.testuser_id)
 
         db.session.add(c2)
         db.session.commit()
@@ -81,5 +78,5 @@ class UserViewTestCase(TestCase):
             resp = c.get(f"/user/{self.testuser_id}")
             
             self.assertEqual(resp.status_code, 200)
-
+            
             self.assertIn("Climbs To-Do:", str(resp.data))

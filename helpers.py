@@ -5,7 +5,7 @@ from requests.api import request
 
 from config import ROOT_URL
 
-def query_climbs(climb_ids, user):
+def query_climbs(climb_ids, user = None):
     """Receives array of ids returns info about those climbs."""
 
     climbs = requests.get(f"{ROOT_URL}/climbs/{climb_ids}")
@@ -23,7 +23,7 @@ def query_climbs(climb_ids, user):
                 climb['type'] += f", {type}"
 
         # If user, show which climbs have been completed / selected todo
-        if user:
+        if not user == None:
             climb['toggle'] = ""
             for todo in user.todo:
                 if int(climb['meta_mp_route_id']) == int(todo.climb_id):
@@ -60,6 +60,5 @@ def join_climb_ids(ids):
             id_string += str(id.climb_id)
         else: 
             id_string += f"|{str(id.climb_id)}"
-    print("***** string id *****")
-    print(ids)
     return id_string
+    

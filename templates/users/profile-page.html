@@ -1,25 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>{{user.username}}</h2>
-    <h3>Email:</h3>
-    <p>{{user.email}}</p>
-    <h3>Bio:</h3>
-    <p>{{user.bio}}</p>
+<h2 class="bio bio-name">{{user.username}}</h2>
+    <div class="bio-wrapper">
+        <div class="bio-image" style="background-image: url('{{user.image_url}}');"></div>
+        <div class="bio-text">
+            <h3 class="bio bio-title">Email:</h3>
+            <p class="bio bio-info">{{user.email}}</p>
+            <br>
+            <br>
+            <h3 class="bio bio-title">Bio:</h3>
+            <p class="bio bio-info">{{user.bio}}</p>
+        </div>
+    </div>
+    <div class="lists">
+        {% if completed|length > 0 %}
+            <div class="list list-completed">
+                <h3>Completed Climbs:</h3>
+                {% for climb in completed %}
+                    <p><a href="/climb/{{climb.meta_mp_route_id}}">{{climb.name}}</a></p>
+                {% endfor %}
+            </div>
+        {% endif %}
     
-    {% if completed|length > 0 %}
-        <h3>Completed Climbs:</h3>
-        {% for climb in completed %}
-            <p><a href="/climb/{{climb.meta_mp_route_id}}">{{climb.name}}</a></p>
-        {% endfor %}
-    {% endif %}
-    
-    {% if user.todo|length > 0 %}
-        <h3>Climbs To-Do:</h3>
-        {% for climb in todo %}
-        <p><a href="/climb/{{climb.meta_mp_route_id}}">{{climb.name}}</a></p>
-        {% endfor %}
-    {% endif %}
+        {% if user.todo|length > 0 %}
+            <div class="list list-todo">
+                <h3>Climbs To-Do:</h3>
+                {% for climb in todo %}
+                <p><a href="/climb/{{climb.meta_mp_route_id}}">{{climb.name}}</a></p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
 
     <form method="GET" action="/user/{{user.id}}/edit">
         <button class="large-button">Edit Profile</button>

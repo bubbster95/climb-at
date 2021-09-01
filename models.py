@@ -61,7 +61,7 @@ class User(db.Model):
 
     image_url = db.Column(
         db.Text,
-        default="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&h=65&w=94"
+        default="/static/profile-pic.jpg"
     )
 
     bio = db.Column(

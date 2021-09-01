@@ -1,10 +1,4 @@
 """User model tests."""
-
-# run these tests like:
-#
-#    python3 -m unittest test_user_model.py
-
-
 import os
 from unittest import TestCase
 from sqlalchemy import exc

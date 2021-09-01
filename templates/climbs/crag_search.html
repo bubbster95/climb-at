@@ -23,8 +23,14 @@
   {% if sectors %}
     {% for sector in sectors %}
       <div class="sector-container" id={{sector.meta_mp_sector_id}}>
-        <h3><a href="/climb/sector/{{sector.meta_mp_sector_id}}">{{sector.meta_parent_sector}}</a></h3>
-        <p>Coordinates: {{sector.lat}},{{sector.lng}}</p>
+        <h3><a href="/climb/sector/{{sector.meta_mp_sector_id}}">
+          {% if sector.meta_parent_sector|length > 25 %}
+            {{sector.meta_parent_sector[:20] + '...'}}
+          {% else %}
+            {{sector.meta_parent_sector}}
+          {% endif %}
+        </a></h3>
+        <p>Coordinates: {{'%0.4f'| format(sector.lat|float)}},{{'%0.4f'| format(sector.lng|float)}}</p>
         <p>{{sector.count}} Climbs</p>
       </div>
     {% endfor %}

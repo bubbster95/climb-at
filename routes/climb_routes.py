@@ -1,3 +1,4 @@
+from os import error
 from flask import render_template, flash, redirect, session, g, Blueprint
 
 from models import User, ToDo, Completed, db
@@ -9,9 +10,15 @@ climb_routes = Blueprint('climb_routes', __name__)
 @climb_routes.route("/climb/sector/<int:sector_id>")
 def show_sector_profile(sector_id):
     "Show information about a sector and its climbs."
+    
+    try:
+        sector = query_sector(sector_id)
+        climb_ids = sector["mp_ids"]
+    except (TypeError, IndexError, KeyError):
+        flash(f"Couldn't find Crags with the id of {sector_id}")
+        return redirect('/search')
 
     sector = query_sector(sector_id)
-    climb_ids = sector["mp_ids"]
 
     if g.user:
         this_user = User.query.get(session[CURR_USER_KEY])
@@ -26,11 +33,19 @@ def show_sector_profile(sector_id):
 def show_climb_profile(climb_id):
     """Show information about a climb."""
 
-    user = User.query.get(session[CURR_USER_KEY])
+    try:
+        if g.user:
+            this_user = User.query.get(session[CURR_USER_KEY])
 
-    climb = query_climbs(climb_id, user)[0]
+            climb = query_climbs(climb_id, this_user)[0]
+            return render_template('/climbs/show.html', climb = climb, user = this_user)
+        else:
+            climb = query_climbs(climb_id)[0]
+            return render_template("/climbs/show.html", climb = climb)
 
-    return render_template('/climbs/show.html', climb = climb, user = user)
+    except (TypeError, IndexError):
+        flash(f"Couldn't find climbs with the id of {climb_id}")
+        return redirect('/')
 
 @climb_routes.route("/add-to-todo/<int:climb_id>", methods=["POST"])
 def add_climb_todo(climb_id):
@@ -65,14 +80,15 @@ def add_climb_id(climb_id):
 
     completed = User.query.get(session[CURR_USER_KEY]).completed
     todos = User.query.get(session[CURR_USER_KEY]).todo
+    
     for complete in completed:
         if complete.climb_id == climb_id:
-
+            
             db.session.delete(complete)
             db.session.commit()
 
             flash(f'Removed climb number: {climb_id} from Completed', 'success')
-        return redirect(f"/climb/{climb_id}")
+            return redirect(f"/climb/{climb_id}")
 
     if g.user:
         for todo in todos:

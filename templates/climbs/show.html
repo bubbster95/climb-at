@@ -4,6 +4,15 @@
 <div class="climb-wrapper" id={{climb.meta_mp_route_id}}>
   <h3>{{climb.name}}</h3>
 
+  <p><b>Dificulty:</b> {{climb.yds}}</p>
+  <p><b>Type:</b> {{climb.type}}</p>
+  <p><b>First Ascent:</b> {{climb.fa}}</p>
+  {% if climb.lat %}
+    <p><b>Latitude:</b> {{climb.lat}}</p>
+    <p><b>Longitude:</b> {{climb.lng}}</p>
+  {% endif %}
+  <p><b>Crag:</b> {{climb.meta_parent_sector}}</p>
+
   {% if user %}
     {% if climb.toggle == 'todo' %}
       <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
@@ -28,13 +37,5 @@
     
 
   {% endif %}
-
-  <p>Dificulty: {{climb.yds}}</p>
-  <p>Type: {{climb.type}}</p>
-  <p>First Ascent: {{climb.fa}}</p>
-  <p>Latitude: {{climb.lat}}</p>
-  <p>Longitude: {{climb.lng}}</p>
-  <p>Climbing Sector: {{climb.meta_parent_sector}}</p>
-
 </div>
 {% endblock %}

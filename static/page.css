@@ -10,7 +10,7 @@ html, body {
     padding: 0;
     color: white;
     background-color: rgb(75, 75, 75);
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 
@@ -20,40 +20,82 @@ h1 {
 
 .content {
     position: relative;
-    width: 90%;
+    width: 100%;
+    z-index: 0;
+    max-width: 1200px;
     margin: auto;
+    padding-top: 100px;
     text-align: center;
 }
 
 .climb-container, .sector-container {
+    position: relative;
     display: inline-block;
-    text-align: center;
     border: solid white;
     background-color: rgba(25, 125, 125, .1);;
     padding: 20px;
-    margin: 10px;
-    width: 20%;
+    vertical-align: top;
+    margin: 15px;
+    width: 15vw;
+    min-width: 150px;
+    height: 200px;
 }
 
+.bio-wrapper {
+    display: flex;
+}
+
+.bio-image, .bio-text {
+    width: 40vw;
+    height: 40vw;
+    margin: 5vw;
+}
+.bio-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bio {
+    display: inline;
+}
+
+.lists {
+    display: flex;
+    align-content: center;
+    border-bottom: solid white 2px;
+    margin-bottom: 50px;
+}
+
+.list {
+    width: 45%;
+    vertical-align: top;
+    margin: 0 auto;
+}
 
 /* ***** Phones ***** */
 /* All Screens below 700px wide in portrait and landscape. */
 @media only screen
     and (max-device-width: 700px) {
     h1 {
-        font-size: 3rem;
+        font-size: 3.5rem;
     }
     h2 {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
     h3 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
     p {
         font-size: 2rem;
     }
+
     .climb-container, .sector-container {
         width: 40%;
+        height: 400px;
+    }
+    .content {  
+        padding-top: 200px;
     }
 }
 /* All Screens below 700px wide in landscape. */

@@ -3,11 +3,17 @@
     text-align: center;
 }
 
-form > input {
+form > input, textarea {
     display: block;
     margin: 20px auto;
-    font-size: 1.5rem;
+    width: 50%;
+    font-size: 25pt;
 }
+
+textarea {
+    height: 25vh;
+}
+
 
 
 /* Non-Retina Laptop Screens */

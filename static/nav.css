@@ -1,12 +1,17 @@
 .nav-container {
+    position: fixed;
+    z-index: 99;
     width: 100vw;
     height: 50px;
+    text-align: center;
+    background-color: rgb(50, 50, 50);
 }
 nav {
-    z-index: 99;
     position: relative;
+    z-index: 99;
     display: inline-block;
     width: 100%;
+    max-width: 1200px;
     height: 100%;
     text-align: center;
     justify-content: center;
@@ -55,7 +60,6 @@ nav > form > button:hover {
     width: 100px;
     height: 100px;
     visibility: hidden;
-    transition: .5s;
 }
 
 
@@ -64,14 +68,6 @@ nav > form > button:hover {
     width: 100%;
     margin: 10% 0px;
     height: 15%;
-}
-
-.top, .bottom {
-    transition: .5s;
-}
-
-.middle {
-    transition: .5s;
 }
 
 
@@ -98,6 +94,7 @@ nav > form > button:hover {
         }
         
         nav {
+            height: 100vh;
             position: absolute;
             top: 0;
             padding-top: 125px;
@@ -135,6 +132,10 @@ nav > form > button:hover {
             top: 15px;
             visibility: visible;
         }
+
+        .hamburger, .top, .middle, .bottom {
+            transition: .5s;
+        }
 }
 
 
@@ -142,7 +143,10 @@ nav > form > button:hover {
 @media only screen
     and (max-device-width: 700px)
     and (orientation: landscape) {
-
+        .nav-container {
+            background-color: transparent;
+        }
+        
         nav > form {
             height: 10%;
             width: 100%;
