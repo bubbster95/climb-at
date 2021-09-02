@@ -28,7 +28,7 @@ app.register_blueprint(search_routes)
 app.register_blueprint(users_routes)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgres:///climb-at-users'))
+    os.environ.get('DATABASE_URL', 'postgres:///climb-at-users')).replace("://", "ql://", 1)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
