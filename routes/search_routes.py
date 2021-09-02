@@ -12,10 +12,13 @@ def filter_search_page():
 
     if sector_form.validate_on_submit():
         data = request.form
+        lat = data['lat'].replace(" ", "")
+        lng = data["lng"].replace(" ", "")
+        rad = data["radius"].replace(" ", "")
         if data["radius"] == "":
-            result = query_many_sectors(data["lat"], data["lng"])
+            result = query_many_sectors(lat, lng)
         else :
-            result = query_many_sectors(data["lat"], data["lng"], data["radius"])
+            result = query_many_sectors(lat, lng, rad)
       
         return render_template("/climbs/crag_search.html", sector_form=sector_form, sectors=result)
     else: 
