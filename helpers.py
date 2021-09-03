@@ -4,7 +4,7 @@ import os
 
 from requests.api import request
 
-from secret import API_KEY_LOCAL
+# from secret import API_KEY_LOCAL
 from config import ROOT_URL, BASE_URL
 
 def query_climbs(climb_ids, user = None):
@@ -68,7 +68,7 @@ def geocode_adress(number, street, town, state):
     street = street.replace(" ", '%20')
     """Converts Adress to GeoCode"""
     
-    API_KEY = os.environ.get('API_KEY', f"{API_KEY_LOCAL}")
+    API_KEY = os.environ.get('API_KEY')
     GOOGLE_GEOCODE = f"{BASE_URL}{number}+{street}+{town}+{state}{API_KEY}" 
     
     result = requests.get(GOOGLE_GEOCODE)
