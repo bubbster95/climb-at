@@ -3,7 +3,7 @@ import json
 
 from requests.api import request
 
-from config import ROOT_URL
+from config import ROOT_URL, BASE_URL, API_KEY
 
 def query_climbs(climb_ids, user = None):
     """Receives array of ids returns info about those climbs."""
@@ -61,4 +61,11 @@ def join_climb_ids(ids):
         else: 
             id_string += f"|{str(id.climb_id)}"
     return id_string
+
+def geocode_adress(number, street, town, state):
+    street = street.replace(" ", '%20')
+    """Tests google api"""
+    GOOGLE_GEOCODE = f"{BASE_URL}{number}+{street}+{town}+{state}{API_KEY}" 
     
+    result = requests.get(GOOGLE_GEOCODE)
+    return result.json()
