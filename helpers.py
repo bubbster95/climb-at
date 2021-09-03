@@ -66,7 +66,7 @@ def join_climb_ids(ids):
 
 def geocode_adress(number, street, town, state):
     street = street.replace(" ", '%20')
-    """Tests google api"""
+    """Converts Adress to GeoCode"""
     
     API_KEY = os.environ.get('API_KEY', f"{API_KEY_LOCAL}")
     GOOGLE_GEOCODE = f"{BASE_URL}{number}+{street}+{town}+{state}{API_KEY}" 
