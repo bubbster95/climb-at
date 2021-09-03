@@ -3,7 +3,8 @@ import json
 
 from requests.api import request
 
-from config import ROOT_URL, BASE_URL, API_KEY
+from secret import API_KEY
+from config import ROOT_URL, BASE_URL
 
 def query_climbs(climb_ids, user = None):
     """Receives array of ids returns info about those climbs."""
