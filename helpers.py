@@ -1,9 +1,10 @@
 import requests
 import json
+import os
 
 from requests.api import request
 
-from secret import API_KEY
+from secret import API_KEY_LOCAL
 from config import ROOT_URL, BASE_URL
 
 def query_climbs(climb_ids, user = None):
@@ -66,6 +67,8 @@ def join_climb_ids(ids):
 def geocode_adress(number, street, town, state):
     street = street.replace(" ", '%20')
     """Tests google api"""
+    
+    API_KEY = os.environ.get('API_KEY', f"{API_KEY_LOCAL}")
     GOOGLE_GEOCODE = f"{BASE_URL}{number}+{street}+{town}+{state}{API_KEY}" 
     
     result = requests.get(GOOGLE_GEOCODE)
