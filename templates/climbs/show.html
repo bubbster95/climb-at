@@ -16,22 +16,34 @@
   {% if user %}
     {% if climb.toggle == 'todo' %}
       <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
-        <button class="climb-button remove">Remove To-Do</button>
+        <button class="climb-button remove">
+          <span class='button-label'>Remove To-Do</span>
+          <span class='button-label'>Remove To-Do</span>
+        </button>
       </form>
     {% else %}
       <form action="/add-to-todo/{{climb.meta_mp_route_id}}" method="POST">
-        <button class="climb-button add">Add To-Do</button>
+        <button class="climb-button add">
+          <span class='button-label'>Add To-Do</span>
+          <span class='button-label'>Add To-Do</span>
+        </button>
       </form>
     {% endif %}
 
     
     {% if climb.toggle == 'completed' %}
       <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
-        <button class="climb-button remove">Mark as Incomplete</button>
+        <button class="climb-button remove">
+          <span class='button-label'>Mark as Incomplete</span>
+          <span class='button-label'>Mark as Incomplete</span>
+        </button>
       </form>
     {% else %}
       <form action="/add-to-complete/{{climb.meta_mp_route_id}}" method="POST">
-        <button class="climb-button add">Mark as Completed</button>
+        <button class="climb-button add">
+          <span class='button-label'>Mark as Completed</span>
+          <span class='button-label'>Mark as Completed</span>
+        </button>
       </form>
     {% endif %}
     

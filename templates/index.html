@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <img class="climb-at-logo" src="/static/climb-at.svg" alt="Climb-at logo">
     <h1>Welcome Climbers!</h1>
 
     <form method="GET" action="/user/signup">
-        <button class="large-button">Create an Account</button>
+        <button class="large-button">
+            <span class='button-label'>Create an Account</span>
+            <span class='button-label'>Create an Account</span>
+        </button>
     </form>
     <br>
     <form method="GET"  action="/search">
-        <button class="large-button">Find Climbs</button>
+        <button class="large-button">
+            <span class='button-label'>Find Climbs</span>
+            <span class='button-label'>Find Climbs</span>
+        </button>
     </form>
 {% endblock %}

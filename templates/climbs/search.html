@@ -2,12 +2,18 @@
 
 {% block content %}
 
-  <form class="large-button" action="/search/coordinates">
-    <button>Search By Coordinates</button>
+  <form class="button-container" action="/search/coordinates">
+    <button class="large-button">
+      <span class='button-label'>Search By Coordinates</span>
+      <span class='button-label'>Search By Coordinates</span>
+    </button>
   </form>
   
-  <form class="large-button" action="/search/address">
-    <button>Find Coordinates by Adress</button>
+  <form class="button-container" action="/search/address">
+    <button class="large-button">
+      <span class='button-label'>Find Coordinates by Address</span>
+      <span class='button-label'>Find Coordinates by Address</span>
+    </button>
   </form>
 
 {% endblock %}

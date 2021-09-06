@@ -18,6 +18,10 @@ h1 {
     text-align: center;
 }
 
+.climb-at-logo {
+    width: 50%;
+}
+
 .content {
     position: relative;
     width: 100%;

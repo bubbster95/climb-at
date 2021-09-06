@@ -2,11 +2,11 @@
 /* titanium_teal: rgb(25, 125, 125) */
 /* rope_red: rgb(175, 25, 50) */
 a {
-    color: rgb(25, 125, 125);
+    color: rgb(175, 225, 225);
 }
 
 a:hover {
-    color: rgb(175, 25, 50);
+    color: rgb(200, 100, 125);
 }
 
 .large-button {
@@ -14,21 +14,32 @@ a:hover {
 }
 
 button {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
     margin: 20px;
+    height: 60px;
+    line-height: 50px;
     color: white;
     background-color: rgba(25, 125, 125, .5);
-    border: solid rgba(175, 25, 50, .8) 3px;
-    padding: 3px;
-    border-top: transparent;
-    border-bottom: transparent;
+    transition: .3;
+    border: solid rgb(50, 50, 50);
 }
 
 button:hover {
-    background-color: rgba(0, 128, 128, .5);
-    border: solid rgba(175, 25, 50, .8) 3px;
-    padding: 0px;
-    border-left: transparent;
-    border-right: transparent;
+    background-color: rgb(25, 125, 125);
+}
+
+.button-label {
+    position: relative;
+    top: 0%;
+    display: block;
+    height: 100%;
+    transition: .3s;
+}
+
+button:hover .button-label {
+    top:-100%;
 }
 
 .climb-button {
@@ -49,13 +60,9 @@ button:hover {
 /* All Screens below 700px wide in portrait. */
 @media only screen
     and (max-device-width: 700px) {
-    button {
-        border: solid rgba(175, 25, 50, .8) 8px;
-        padding: 3px 10px;
-        border-top: transparent;
-        border-bottom: transparent;
-    }
     .large-button {
+        height: 150px;
+        line-height: 140px;
         font-size: 3rem;
     }
     .climb-button {
