@@ -67,8 +67,6 @@ def search_by_address():
             return render_template('/climbs/search_form.html',  sector_form=sector_form)
         else: 
             flash(f"The address feature is currently unavailable at this time. Sorry for the inconvenience. Please use the coordinate search")
-            print("***** Status *****")
-            print(response)
             return redirect(f"/search/coordinates")
     else: 
         return render_template('/climbs/search_form.html',  sector_form=sector_form)

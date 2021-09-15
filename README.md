@@ -23,12 +23,14 @@ Table of Contents:
 
 #### Future Features:
 1. Dryness Index
-    * Using a weather API to predict the moisure level of a climb.
+    * Using a weather API to predict the moisture level of a climb.
     * Allows you to see predicted dryness index for planing trips.
 2. User comentary
     * Users will be able to comment on climbs.
     * Users will be able to submit updates about climbs.
     * Users will be able to chat with each other.
+3. Add a Map
+    * https://leafletjs.com/
 
 ---
 
